@@ -1,0 +1,48 @@
+.input {
+	display: none;
+}
+label {
+	cursor: pointer;
+	display: inline-flex;
+	gap: 30px;
+	align-items: center;
+	user-select: none;
+  	-webkit-tap-highlight-color: transparent;
+  	transform: translate3d(0,0,0);
+	margin-left: 20px;
+}
+svg {
+    position: relative;
+    z-index: 1;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #C8CCD4;
+    stroke-width: 1.5;
+    transform: translate3d(0,0,0);
+    transition: all .2s ease;
+}
+svg path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+}
+svg polyline {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 66;
+}
+svg polyline:hover::before {
+    opacity: 1;
+}
+
+input:checked+label svg {
+	stroke: #00ad0e;
+}
+input:checked+label svg path {
+	stroke-dashoffset: 60;
+	transition: all .3s linear;
+}
+input:checked+label svg polyline {
+	stroke-dashoffset: 42;
+	transition: all .2s linear;
+	transition-delay: .15s;
+}

@@ -1,0 +1,11 @@
+.input {
+	border-bottom: 1px solid rgba(160, 160, 160, 0.648);
+}
+
+.form {
+	width: 80%;
+	border: none;
+	outline: none;
+	padding: 20px 10px;
+	font-size: 22px;
+}

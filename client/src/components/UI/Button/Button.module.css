@@ -1,0 +1,6 @@
+.btn {
+	display: block;
+	margin: 25px 20px 0 20px;
+	font-size: 16px;
+	border: 1px solid rgba(160, 160, 160, 0.648);
+}
