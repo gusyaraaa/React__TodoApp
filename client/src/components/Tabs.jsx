@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { NotepadContext } from "../context";
 import cl from "../styles/App.module.css";
 
-export const Tabs = ({ activeTab, setActiveTab, tabs }) => {
+export const Tabs = ({ tabs }) => {
+	const { activeTab, setActiveTab } = useContext(NotepadContext);
 	const openTab = (e) => setActiveTab(+e.target.dataset.index);
 
 	return (

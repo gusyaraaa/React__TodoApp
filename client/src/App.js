@@ -4,22 +4,17 @@ import { TodoFilter } from "./components/TodoFilter";
 import { Notepad } from "./components/UI/Notepad/Notepad";
 import { TodoInput } from "./components/TodoInput";
 import cl from "./styles/App.module.css";
+import { NotepadContext } from "./context";
 
-const data = JSON.parse(localStorage.getItem("todos")) || [
-	{ id: 1, title: "learn js", checked: false },
-	{ id: 2, title: "learn css", checked: true },
-	{ id: 3, title: "learn typescript", checked: false },
-	{ id: 4, title: "learn react", checked: false },
+const data = JSON.parse(localStorage.getItem("todos")) || [];
+const tabs = [
+	{ title: "All", content: (todos) => todos },
+	{ title: "Active", content: (todos) => todos.filter((todo) => !todo.checked) },
+	{ title: "Completed", content: (todos) => todos.filter((todo) => todo.checked) },
 ];
 
 export const App = () => {
 	const [todos, setTodos] = useState(data);
-
-	const tabs = [
-		{ title: "All", todos: todos },
-		{ title: "Active", todos: todos.filter((todo) => !todo.checked) },
-		{ title: "Completed", todos: todos.filter((todo) => todo.checked) },
-	];
 	const [activeTab, setActiveTab] = useState(0);
 
 	return (
@@ -27,9 +22,18 @@ export const App = () => {
 			<h1 className={cl.title}>todos</h1>
 
 			<Notepad>
-				<TodoInput todos={todos} setTodos={setTodos} />
-				<TodoList todos={todos} setTodos={setTodos} tabs={tabs} activeTab={activeTab} />
-				<TodoFilter todos={todos} setTodos={setTodos} activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
+				<NotepadContext.Provider
+					value={{
+						todos,
+						setTodos,
+						activeTab,
+						setActiveTab,
+					}}
+				>
+					<TodoInput />
+					<TodoList tabs={tabs} />
+					<TodoFilter tabs={tabs} />
+				</NotepadContext.Provider>
 			</Notepad>
 
 			<div className={cl.footer}>

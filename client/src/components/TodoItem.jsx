@@ -4,7 +4,7 @@ import { Popup } from "./UI/Popup/Popup";
 import cl from "../styles/App.module.css";
 import { PopupContent } from "./PopupContent";
 
-export const TodoItem = ({ todos, setTodos, id, title, ...props }) => {
+export const TodoItem = ({ id, title, ...props }) => {
 	const [isPopupActive, setPopupActive] = useState(false);
 
 	return (
@@ -12,7 +12,7 @@ export const TodoItem = ({ todos, setTodos, id, title, ...props }) => {
 			<Checkbox id={id} title={title} {...props} />
 
 			<Popup isPopupActive={isPopupActive} setPopupActive={setPopupActive}>
-				<PopupContent todos={todos} setTodos={setTodos} title={title} id={id} setPopupActive={setPopupActive} />
+				<PopupContent title={title} id={id} setPopupActive={setPopupActive} />
 			</Popup>
 		</div>
 	);

@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { NotepadContext } from "../context";
 import { Arrow } from "./UI/Arrow/Arrow";
 import { Input } from "./UI/Input/Input";
 
-export const TodoInput = ({ todos, setTodos }) => {
+export const TodoInput = () => {
+	const { todos, setTodos } = useContext(NotepadContext);
 	const [isInputActive, setInputActive] = useState(false);
 
 	const addTodo = (e) => {
-		if (e.key === "Enter") {
+		if (e.key === "Enter" && e.target.value.trim() !== "") {
 			localStorage.setItem(
 				"todos",
 				JSON.stringify([
@@ -27,8 +29,6 @@ export const TodoInput = ({ todos, setTodos }) => {
 
 	return (
 		<Input
-			todos={todos}
-			setTodos={setTodos}
 			name="addTodo"
 			id="addTodo"
 			isInputActive={isInputActive}
@@ -36,7 +36,7 @@ export const TodoInput = ({ todos, setTodos }) => {
 			onFocus={() => setInputActive(true)}
 			onBlur={() => setInputActive(false)}
 		>
-			<Arrow todos={todos} setTodos={setTodos} />
+			<Arrow />
 		</Input>
 	);
 };

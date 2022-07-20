@@ -1,7 +1,10 @@
 import { Tabs } from "./Tabs";
 import cl from "../styles/App.module.css";
+import { useContext } from "react";
+import { NotepadContext } from "../context";
 
-export const TodoFilter = ({ todos, setTodos, activeTab, setActiveTab, tabs }) => {
+export const TodoFilter = ({ tabs }) => {
+	const { todos, setTodos } = useContext(NotepadContext);
 	const tasksLeft = todos.length - todos.filter((todo) => todo.checked).length;
 
 	const clearCompletedTasks = () => {
@@ -12,7 +15,7 @@ export const TodoFilter = ({ todos, setTodos, activeTab, setActiveTab, tabs }) =
 	return (
 		<div className={cl.filter}>
 			<p className={cl.tasks}>{tasksLeft ?? 0} tasks left</p>
-			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
+			<Tabs tabs={tabs} />
 			<button className={cl.clear} onClick={clearCompletedTasks}>
 				Clear completed
 			</button>

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { NotepadContext } from "../context";
 import { PopupInput } from "./PopupInput";
 import { Button } from "./UI/Button/Button";
 
-export const PopupContent = ({ todos, setTodos, title, id, setPopupActive }) => {
+export const PopupContent = ({ title, id, setPopupActive }) => {
+	const { todos, setTodos } = useContext(NotepadContext);
 	const [newTitle, setNewTitle] = useState(title);
 
 	const editTodo = () => {

@@ -1,6 +1,6 @@
 import cl from "./Input.module.css";
 
-export const Input = ({ todos, setTodos, isInputActive, children, ...props }) => {
+export const Input = ({ isInputActive, children, ...props }) => {
 	return (
 		<div className={cl.input}>
 			{children}

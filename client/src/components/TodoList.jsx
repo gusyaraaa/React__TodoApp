@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { NotepadContext } from "../context";
 import { TodoItem } from "./TodoItem";
 
-export const TodoList = ({ todos, setTodos, tabs, activeTab }) => {
+export const TodoList = ({ tabs }) => {
+	const { todos, setTodos, activeTab } = useContext(NotepadContext);
+
 	const handleCheckbox = (todo) => {
 		todo.checked = !todo.checked;
 		localStorage.setItem("todos", JSON.stringify([...todos]));
@@ -9,29 +13,16 @@ export const TodoList = ({ todos, setTodos, tabs, activeTab }) => {
 
 	return (
 		<div>
-			{tabs[activeTab].todos.map((todo) => {
-				return todo.checked ? (
+			{tabs[activeTab].content(todos).map((todo) => {
+				return (
 					<TodoItem
 						key={todo.id}
-						todos={todos}
-						setTodos={setTodos}
 						id={todo.id}
 						title={todo.title}
 						onChange={() => {
 							handleCheckbox(todo);
 						}}
-						checked
-					/>
-				) : (
-					<TodoItem
-						key={todo.id}
-						todos={todos}
-						setTodos={setTodos}
-						id={todo.id}
-						title={todo.title}
-						onChange={() => {
-							handleCheckbox(todo);
-						}}
+						checked={todo.checked}
 					/>
 				);
 			})}

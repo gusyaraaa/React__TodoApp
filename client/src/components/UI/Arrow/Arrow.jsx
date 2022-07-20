@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { NotepadContext } from "../../../context";
 import cl from "./Arrow.module.css";
 
-export const Arrow = ({ todos, setTodos }) => {
+export const Arrow = () => {
+	const { todos, setTodos } = useContext(NotepadContext);
 	const [isRotatedArrow, setRotatedArrow] = useState(false);
 
 	return (
